@@ -92,9 +92,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\portesdisparus\PeopLost.MVC.csproj">
+    <ProjectReference Include="..\portesdisparus\PeopLost.Web.csproj">
       <Project>{70515576-94DC-4F7C-B69C-56820E0565E2}</Project>
-      <Name>PeopLost.MVC</Name>
+      <Name>PeopLost.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

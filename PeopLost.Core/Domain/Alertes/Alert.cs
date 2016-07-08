@@ -1,5 +1,6 @@
 ﻿using PeopLost.Core.Domain.Comments;
 using PeopLost.Core.Domain.Members;
+using PeopLost.Core.Domain.Persons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,11 @@ namespace PeopLost.Core.Domain.Alertes
         public DateTime? DateAlert { get; set; }
 
         /// <summary>
+        /// Gets or sets the Person ID
+        /// </summary>
+        public Int32 PersonId { get; set; }
+
+        /// <summary>
         /// Gets or sets the User Id  
         /// </summary>
         public int UserId { get; set; }
@@ -40,6 +46,11 @@ namespace PeopLost.Core.Domain.Alertes
         /// Gets or sets the User
         /// </summary>
         public virtual Member Member { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Person
+        /// </summary>
+        public virtual Person Person { get; set; }
 
         /// <summary>
         /// Gets or sets the collection of the comments of member
