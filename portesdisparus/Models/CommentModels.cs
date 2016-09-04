@@ -17,138 +17,146 @@ namespace PeopLost.Web.Models
         /// <summary>
         /// Gets or sets the Alert Id
         /// </summary>
-        public int AlertId { get; set; }
+        public string AlertId { get; set; }
 
         /// <summary>
         /// Gets or sets the Member Id
         /// </summary>
-        public int MemberId { get; set; }
+        public string MemberId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Member Models
+        /// </summary>
+        public MemberModels Member { get; set; }
 
     }
 
-    public class ListViewCommentModel
+    public class ListCommentViewModel
     {
-        private ICollection<CommentModels> _listcommentviewModel;
+        public IList<CommentModels> Items { set; get; }
 
-        public ListViewCommentModel()
+        public ListCommentViewModel()
         {
-            this._listcommentviewModel.Add(new CommentModels(){
-             AlertId=0,
-              DatePost=DateTime.Now,
-              MemberId=0,
-             Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 0,
-                DatePost = DateTime.Now,
-                MemberId = 1,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 0,
-                DatePost = DateTime.Now,
-                MemberId = 2,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            this.Items = new List<CommentModels>();
+            //this._ListcommentViewModel = new List<CommentModels>() {
+            // new CommentModels(){
+            // AlertId=0,
+            //  DatePost=DateTime.Now,
+            //  MemberId=0,
+            // Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
+            //new CommentModels()
+            //{
+            //    AlertId = 0,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 1,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
+            //new CommentModels()
+            //{
+            //    AlertId = 0,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 2,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 1,
-                DatePost = DateTime.Now,
-                MemberId = 0,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 1,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 0,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 1,
-                DatePost = DateTime.Now,
-                MemberId = 1,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 1,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 1,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 1,
-                DatePost = DateTime.Now,
-                MemberId = 2,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 1,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 2,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 3,
-                DatePost = DateTime.Now,
-                MemberId = 0,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 3,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 0,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 3,
-                DatePost = DateTime.Now,
-                MemberId = 1,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 3,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 1,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 3,
-                DatePost = DateTime.Now,
-                MemberId = 2,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 3,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 2,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 4,
-                DatePost = DateTime.Now,
-                MemberId = 0,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 4,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 0,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 5,
-                DatePost = DateTime.Now,
-                MemberId = 0,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 5,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 0,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 6,
-                DatePost = DateTime.Now,
-                MemberId = 0,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 6,
-                DatePost = DateTime.Now,
-                MemberId = 1,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 6,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 0,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
+            //new CommentModels()
+            //{
+            //    AlertId = 6,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 1,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 7,
-                DatePost = DateTime.Now,
-                MemberId = 0,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
+            //new CommentModels()
+            //{
+            //    AlertId = 7,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 0,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //},
 
-            this._listcommentviewModel.Add(new CommentModels()
-            {
-                AlertId = 7,
-                DatePost = DateTime.Now,
-                MemberId = 1,
-                Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
-            });
-
+            //new CommentModels()
+            //{
+            //    AlertId = 7,
+            //    DatePost = DateTime.Now,
+            //    MemberId = 1,
+            //    Post = "Canada Post would like to inform you of the following regarding our return to operations in Fort McMurray. Effective Monday June 13, 2016, we will be starting some mail services in the affected areas of Fort McMurray"
+            //}
+            //};
+        
 
 
         }

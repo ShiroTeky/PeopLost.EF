@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PeopLost.Models
@@ -9,6 +10,7 @@ namespace PeopLost.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
 
     public class ExternalLoginListViewModel
     {
@@ -48,9 +50,16 @@ namespace PeopLost.Models
 
     public class LoginViewModel
     {
+        
+        
+        //public Guid Userid { get; set; }
+
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
-        [Display(Name = "Email")]
         [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
@@ -64,6 +73,27 @@ namespace PeopLost.Models
 
     public class RegisterViewModel
     {
+
+        public string Id { get;set;}
+
+        public DateTime BirthDay{get;set;}
+
+        public string Gender {get;set;}
+
+        public string Address { get; set; }
+
+        public string ImageUrl{get;set;}
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
+
+        [Required]
+        [Display(Name = "PhoneNumber")]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

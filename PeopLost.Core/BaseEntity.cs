@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PeopLost.Core
 {
     public abstract partial class BaseEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -17,7 +14,7 @@ namespace PeopLost.Core
 
         private static bool IsTransient(BaseEntity obj)
         {
-            return obj != null && Equals(obj.Id, default(int));
+            return obj != null && Equals(obj.Id, default(Guid));
         }
 
         private Type GetUnproxiedType()
@@ -48,7 +45,7 @@ namespace PeopLost.Core
 
         public override int GetHashCode()
         {
-            if (Equals(Id, default(int)))
+            if (Equals(Id, default(Guid)))
                 return base.GetHashCode();
             return Id.GetHashCode();
         }

@@ -1,9 +1,5 @@
 ﻿using PeopLost.Core.Domain.Pictures;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeopLost.Core.Domain.Administrators
 {
@@ -12,13 +8,8 @@ namespace PeopLost.Core.Domain.Administrators
 
         public Administrator()
         {
-            this.AdminGuid = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
-
-        /// <summary>
-        /// Gets or sets the customer Guid
-        /// </summary>
-        public Guid AdminGuid { get; set; }
 
 
         /// <summary>

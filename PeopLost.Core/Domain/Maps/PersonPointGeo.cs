@@ -6,15 +6,22 @@ namespace PeopLost.Core.Domain.Maps
 {
     public partial class PersonPointGeo:BaseEntity
     {
+
+
+        public PersonPointGeo(){
+            this.Id = Guid.NewGuid();
+        }
+
+      
         /// <summary>
         /// Gets or sets the people id
         /// </summary>
-        public int PersonId { get; set; }
+        public Guid PersonId { get; set; }
 
         /// <summary>
         /// Gets or sets the Member id
         /// </summary>
-        public int MemberId { get; set; }
+        public Guid MemberId { get; set; }
 
         /// <summary>
         /// Gets or sets the current address where user sees him

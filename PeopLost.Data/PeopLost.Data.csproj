@@ -46,7 +46,9 @@
     <Compile Include="Mapping\Administrators\Administrator.cs" />
     <Compile Include="Mapping\Alertes\AlertMap.cs" />
     <Compile Include="Mapping\Comments\CommentMap.cs" />
-    <Compile Include="Mapping\Maps\globalGeoMap.cs" />
+    <Compile Include="Mapping\ConnectionHub\ConnectionMap.cs" />
+    <Compile Include="Mapping\Town\TownMap.cs" />
+    <Compile Include="Mapping\Countries\CountryMap.cs" />
     <Compile Include="Mapping\Members\MemberMap.cs" />
     <Compile Include="Mapping\PeopLostEntityTypeConfiguration.cs" />
     <Compile Include="Mapping\Persons\PersonMap.cs" />
@@ -58,10 +60,8 @@
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\PeopLost.Core\PeopLost.Core.csproj">
       <Project>{6c9a3f37-a166-48a4-9b76-80f5b8fbd20f}</Project>

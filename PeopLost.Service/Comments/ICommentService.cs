@@ -1,5 +1,7 @@
 ﻿
 using PeopLost.Core.Domain.Comments;
+using System;
+using System.Collections.Generic;
 
 
 namespace PeopLost.Service.Comments
@@ -10,25 +12,25 @@ namespace PeopLost.Service.Comments
         /// Deletes a  Comment
         /// </summary>
         /// <param name="Comment">Comment</param>
-        public virtual void DeleteComment(Comment Comment);
+        void Delete(Comment Comment);
 
         /// <summary>
         /// Gets a Comment
         /// </summary>
         /// <param name="CommentId">The Comment identifier</param>
         /// <returns>Comment</returns>
-        public virtual Comment GetCommentById(int CommentId);
+        Comment GetById(Guid CommentId);
 
         /// <summary>
         /// Inserts a Comment item
         /// </summary>
         /// <param name="Comment">Comment</param>
-        public virtual void InsertComment(Comment Comment);
+       void Insert(Comment Comment);
 
         /// <summary>
         /// Updates the Comment item
         /// </summary>
         /// <param name="Comment">Comment item</param>
-        public virtual void UpdateComment(Comment Comment);
+        void Update(Comment Comment);
     }
 }

@@ -12,6 +12,7 @@ namespace PeopLost.Data.Mapping.Pictures
             this.HasKey(t => t.Id);
             this.Property(t => t.Binary);
             this.Property(t => t.MimeType);
+
             ToTable("Pictures");
         }
     }

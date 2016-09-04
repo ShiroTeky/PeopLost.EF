@@ -20,7 +20,7 @@ namespace PeopLost.Data.Mapping.Maps
 
             this.Property(t => t.Town);
             this.Property(t => t.CurrentAddress);
-            this.Property(t => t.DateMapping);
+            this.Property(t => t.DateMapping).HasColumnType("datetime2");
 
             this.HasRequired(pg => pg.Member)
                 .WithMany()

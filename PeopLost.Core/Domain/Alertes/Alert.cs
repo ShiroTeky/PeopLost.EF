@@ -2,26 +2,22 @@
 using PeopLost.Core.Domain.Members;
 using PeopLost.Core.Domain.Persons;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PeopLost.Core.Domain.Alertes
 {
-    public partial class Alert:BaseEntity
+    public partial class Alert : BaseEntity
     {
-
-        private ICollection<Comment> _comments;
 
         public Alert()
         {
         }
-
         /// <summary>
         /// Gets or sets the post
         /// </summary>
         public string Post { get; set; }
+
+        public string LooserAddress { get; set; } 
 
         /// <summary>
         /// Gets or sets the Date of Post
@@ -29,14 +25,24 @@ namespace PeopLost.Core.Domain.Alertes
         public DateTime? DateAlert { get; set; }
 
         /// <summary>
-        /// Gets or sets the Person ID
+        /// Gets or sets the Date of disappearing
         /// </summary>
-        public Int32 PersonId { get; set; }
+        public DateTime? DayDisappear { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Date of Validation of the Alert as Concrete
+        /// </summary>
+        public DateTime? DateValidation { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the Person Id
+        /// </summary>
+        public Guid PersonId { get; set; }
 
         /// <summary>
         /// Gets or sets the User Id  
         /// </summary>
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         /// <summary>
         /// Gets or sets the status of the alert: verified or not
         /// </summary>
@@ -52,14 +58,12 @@ namespace PeopLost.Core.Domain.Alertes
         /// </summary>
         public virtual Person Person { get; set; }
 
-        /// <summary>
-        /// Gets or sets the collection of the comments of member
-        /// </summary>
-        public ICollection<Comment> Comments
-        {
-            get { return _comments ?? (_comments = new List<Comment>()); }
-            protected set { _comments = value; }
-        }
-
+        //public virtual ICollection<Comment> Comments
+        //{
+        //    get { return _comments ?? (_comments = new List<Comment>()); }
+        //    protected set { _comments = value; }
+        
+        //}
+        public bool Found { get; set; }
     }
 }

@@ -4,11 +4,17 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PeopLost.Models;
+using PeopLost.Service.Members;
+using PeopLost.Core.Domain.Members;
+using System.Web.Security;
+using PeopLost.Service.Pictures;
+using PeopLost.Web.Models;
 
 namespace PeopLost.Controllers
 {
@@ -17,15 +23,21 @@ namespace PeopLost.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public AccountController()
+        private IPictureService _pictureservice;
+        private IMemberService _memberService;
+        public  AccountController(IPictureService PictureService, IMemberService MemberService)
         {
+            _pictureservice = PictureService;
+            _memberService = MemberService;
         }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        
+        public AccountController(ApplicationUserManager userManager, 
+            ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+     
+
         }
 
         public ApplicationSignInManager SignInManager
@@ -38,6 +50,34 @@ namespace PeopLost.Controllers
             { 
                 _signInManager = value; 
             }
+        }
+
+        public ActionResult EditPhoto(string id)
+        {
+            ViewBag.UserId = id;
+            return View("EditPhoto");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditPhoto(string id, HttpPostedFileBase InputFile)
+        {
+            try
+            {
+                if (InputFile != null)
+                {
+                    var userGuid = Guid.Parse(id);
+                    ViewBag.PhotoUrl = await _pictureservice.UploadToAzureStorage(userGuid, InputFile);
+                    ViewBag.Message = "Edited successed";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.Write(ex.Message);
+                ViewBag.Message = "Edited failed";
+
+            }
+            return View("EditOk");
         }
 
         public ApplicationUserManager UserManager
@@ -58,7 +98,7 @@ namespace PeopLost.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View("Login");
         }
 
         //
@@ -75,10 +115,22 @@ namespace PeopLost.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            // where db is ApplicationDbContext instance
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Where(u => u.Email.Equals(model.Email)).Single(); 
+            var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    var member = _memberService.GetByEmail(model.Email);
+                    Session["photourl"] = member.ImageUrl;
+                    Session["userId"] = member.Id;
+                    Session["user"] = member;
+                    Session["userEmail"] = model.Email;
+                    Session["userName"] = user.UserName;
+
+                    
+                    FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -147,16 +199,34 @@ namespace PeopLost.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model,HttpPostedFileBase InputFile)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,
+                    PhoneNumber=model.PhoneNumber };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    Guid userGuid = Guid.Parse(user.Id);
+                    // Get the profile picture from azure blob
+                    var photoreturnurl = await _pictureservice.UploadToAzureStorage(userGuid, InputFile);
+                    //Update the Table Users ImageUrl
+                    string datebirthday = model.BirthDay.ToString();
+                    Member newMember = new Member() { 
+                        Id= Guid.Parse(user.Id), Address=model.Address, BirthDay= datebirthday, 
+                        Gender=model.Gender, ImageUrl=photoreturnurl, Email=model.Email, UserName=model.UserName };
+                    _memberService.Insert(newMember);
+
+                    //Set the user Session
+                    Session["photourl"] = photoreturnurl;
+                    Session["userId"] = user.Id;
+                    Session["user"] = user;
+                    Session["userEmail"] = model.Email;
+                    Session["userName"] = user.UserName;
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -385,7 +455,48 @@ namespace PeopLost.Controllers
             return View(model);
         }
 
-        //
+        // POST : Profile Information Member
+        [HttpPost]
+        [ValidateAntiForgeryToken] 
+        public async Task<ActionResult> SaveProfile(MemberModels model, HttpPostedFileBase InputFile)
+        {
+            var memid = Guid.Parse(Session["userid"].ToString()) ;
+            var photourl  = await _pictureservice.UploadToAzureStorage(memid, InputFile);
+            _memberService.Insert(new Member {
+             Id = memid, Gender= model.Gender, isAdmin = false
+            });
+            return View();
+        }
+
+        //GET : Profile Information Member
+        [HttpGet]
+        public ActionResult ProfileMember()
+        {
+            var memid = Guid.Parse(Session["userid"].ToString()) ;
+            var _data = _memberService.GetById(memid);
+            MemberModels model = new MemberModels()
+            {
+                 Address = _data.Address, BirthDay= _data.BirthDay, 
+                 UserName = _data.UserName, Gender = _data.Gender
+            };
+            return View("ProfileMember",model);
+        }
+
+        [HttpPost]
+        public ActionResult ProfileMember(MemberModels _data)
+        {
+
+            Member item = new Member() {
+                Address = _data.Address,
+                BirthDay = _data.BirthDay,
+                Gender = _data.Gender,
+                 Email =_data.Email
+            };
+
+            _memberService.Update(item);
+            return View("ProfileMember", _data);
+        }
+        
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]

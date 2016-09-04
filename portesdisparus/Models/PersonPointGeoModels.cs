@@ -8,12 +8,12 @@ namespace PeopLost.Web.Models
         /// <summary>
         /// Gets or sets the people id
         /// </summary>
-        public int PersonId { get; set; }
+        public Guid PersonId { get; set; }
 
         /// <summary>
         /// Gets or sets the Member id
         /// </summary>
-        public int MemberId { get; set; }
+        public Guid MemberId { get; set; }
 
         /// <summary>
         /// Gets or sets the current address where user sees him
@@ -44,41 +44,42 @@ namespace PeopLost.Web.Models
 
     public class ListPointGeoViewModels
     {
-        private ICollection<PersonPointGeoModels> _listpointGeoViewModel;
+        public IList<PersonPointGeoModels> _Items { get; set; }
 
         public ListPointGeoViewModels()
         {
-            this._listpointGeoViewModel.Add(new PersonPointGeoModels() {
-                CurrentAddress = "Blockhauss",
-                DateMapping = DateTime.Now,
-                Town = "Abidjan",
-                PersonId = 1,
-                MemberId = 0,
-                Latitude = 5.325111,
-                Longitude = -4.001951
-            });
-
-            this._listpointGeoViewModel.Add(new PersonPointGeoModels()
-            {
-                CurrentAddress = "Cocody",
-                DateMapping = DateTime.Now,
-                Town = "Abidjan",
-                PersonId = 1,
-                MemberId = 0,
-                Latitude = 5.625111,
-                Longitude = -3.001951
-            });
-
-            this._listpointGeoViewModel.Add(new PersonPointGeoModels()
-            {
-                CurrentAddress = "Cocody",
-                DateMapping = DateTime.Now,
-                Town = "Abidjan",
-                PersonId = 1,
-                MemberId = 1,
-                Latitude = 6.325111,
-                Longitude = -5.001951
-            });
+            this._Items = new List<PersonPointGeoModels>();
+           // this._listpointGeoViewModel = new List<PersonPointGeoModels>(){ 
+           //     new PersonPointGeoModels() {
+           //     CurrentAddress = "Blockhauss",
+           //     DateMapping = DateTime.Now,
+           //     Town = "Abidjan",
+           //     PersonId = 1,
+           //     MemberId = 0,
+           //     Latitude = 5.325111,
+           //     Longitude = -4.001951
+           // },
+           // new PersonPointGeoModels()
+           // {
+           //     CurrentAddress = "Cocody",
+           //     DateMapping = DateTime.Now,
+           //     Town = "Abidjan",
+           //     PersonId = 1,
+           //     MemberId = 0,
+           //     Latitude = 5.625111,
+           //     Longitude = -3.001951
+           // },
+           // new PersonPointGeoModels()
+           // {
+           //     CurrentAddress = "Cocody",
+           //     DateMapping = DateTime.Now,
+           //     Town = "Abidjan",
+           //     PersonId = 1,
+           //     MemberId = 1,
+           //     Latitude = 6.325111,
+           //     Longitude = -5.001951
+           // }
+           //};
         }
     }
 }

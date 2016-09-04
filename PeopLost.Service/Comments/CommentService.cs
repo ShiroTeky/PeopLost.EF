@@ -1,36 +1,45 @@
 ﻿using System;
 using PeopLost.Core.Domain.Comments;
 using PeopLost.Core.Data;
+using System.Collections.Generic;
 
 namespace PeopLost.Service.Comments
 {
     public partial class CommentService:ICommentService
     {
         IRepository<Comment> commentRepository;
+        
 
         public CommentService(IRepository<Comment> commentRepository)
         {
             this.commentRepository = commentRepository;
         }
 
-        public virtual void DeleteComment(Comment Comment)
+        public void Delete(Comment Comment)
         {
             commentRepository.Delete(Comment);
         }
 
-        public virtual Comment GetCommentById(int CommentId)
+        public Comment GetById(Guid CommentId)
         {
             return commentRepository.GetById(CommentId);
         }
 
-        public virtual void InsertComment(Comment Comment)
+        public IList<Comment> GetByAlertId(Guid AlertId)
+        {
+            return null;
+        }
+
+        public void Insert(Comment Comment)
         {
             commentRepository.Insert(Comment);
         }
 
-        public virtual void UpdateComment(Comment Comment)
+        public void Update(Comment Comment)
         {
             commentRepository.Update(Comment);
         }
+
+       
     }
 }

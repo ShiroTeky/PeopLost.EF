@@ -13,6 +13,8 @@ namespace PeopLost.Data
         /// <returns>DbSet</returns>
         IDbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity;
 
+
+        void ChangeState<TEntity>(TEntity entity, EntityState state) where TEntity : class;
         /// <summary>
         /// Save changes
         /// </summary>

@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 namespace PeopLost.Web.Models
 {
     public class PictureModels
@@ -12,5 +13,14 @@ namespace PeopLost.Web.Models
         /// Gets or sets the people image in bit
         /// </summary>
         public byte[] Binary { get; set; }
+    }
+
+    public class ListPictureViewModels
+    {
+        public IList<PictureModels> _Items{get;set;}
+        public ListPictureViewModels()
+        {
+            this._Items = new List<PictureModels>();
+        }
     }
 }

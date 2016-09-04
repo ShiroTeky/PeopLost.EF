@@ -17,10 +17,12 @@ namespace PeopLost.Data.Mapping.Persons
             this.Property(t => t.Gender).HasMaxLength(1);
             this.Property(t => t.Country).HasMaxLength(30);
             this.Property(t => t.City).HasMaxLength(30);
-            this.Property(t => t.LooserAddress).HasMaxLength(50);
+            this.Property(t => t.MemberId);
+            this.Property(t => t.Address).HasMaxLength(200);
             this.Property(t => t.YearsOld).IsOptional();
             this.Property(t => t.Caracteristics).HasMaxLength(200);
-            this.Property(t => t.DayDisappear);
+            this.Property(t => t.ImageUrl);
+            
 
         }
 

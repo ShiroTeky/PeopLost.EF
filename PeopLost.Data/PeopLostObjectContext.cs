@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Data.Entity.Infrastructure;
 using System.Data.Common;
 using System.Data;
+using PeopLost.Data.Mapping;
 
 namespace PeopLost.Data
 {
@@ -18,7 +19,7 @@ namespace PeopLost.Data
         #region Ctor
 
         public PeopLostObjectContext()
-            : base("name=bd_app_disparueConnectionString")
+            : base("name=bdlostConnectionString")
         {
             //((IObjectContextAdapter) this).ObjectContext.ContextOptions.LazyLoadingEnabled = true;
         }
@@ -36,7 +37,7 @@ namespace PeopLost.Data
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
             .Where(type => !String.IsNullOrEmpty(type.Namespace))
             .Where(type => type.BaseType != null && type.BaseType.IsGenericType &&
-                type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
+                type.BaseType.GetGenericTypeDefinition() == typeof(PeopLostEntityTypeConfiguration<>));
             foreach (var type in typesToRegister)
             {
                 dynamic configurationInstance = Activator.CreateInstance(type);
@@ -234,5 +235,11 @@ namespace PeopLost.Data
         }
 
         #endregion
+
+
+        public void ChangeState<TEntity>(TEntity entity, EntityState state) where TEntity : class
+        {
+            base.Entry(entity).State = state;
+        }
     }
 }

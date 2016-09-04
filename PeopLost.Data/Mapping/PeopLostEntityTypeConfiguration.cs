@@ -1,8 +1,9 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using PeopLost.Core;
+using System.Data.Entity.ModelConfiguration;
 
 namespace PeopLost.Data.Mapping
 {
-    public abstract class PeopLostEntityTypeConfiguration<T>:EntityTypeConfiguration<T>
+    public abstract class PeopLostEntityTypeConfiguration<T>:EntityTypeConfiguration<T> where T:BaseEntity
     {
         protected  PeopLostEntityTypeConfiguration()
         {

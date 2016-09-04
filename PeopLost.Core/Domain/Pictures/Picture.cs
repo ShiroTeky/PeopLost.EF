@@ -8,6 +8,7 @@ namespace PeopLost.Core.Domain.Pictures
         {
 
         }
+
         /// <summary>
         /// Gets or sets the people picture mime type
         /// </summary>
@@ -17,5 +18,7 @@ namespace PeopLost.Core.Domain.Pictures
         /// Gets or sets the people image in bit
         /// </summary>
         public byte[] Binary { get; set; }
+
+
     }
 }

@@ -11,15 +11,16 @@ namespace PeopLost.Data.Mapping.Comments
 
             this.Property(t => t.Post);
 
-            this.Property(t => t.DatePost);
+            this.Property(t => t.DatePost).HasColumnType("datetime2");
 
-            this.HasRequired(m => m.Member)
-                .WithMany()
-                .HasForeignKey(m => m.MemberId);
+            this.HasRequired(t => t.Member).WithMany()
+                .HasForeignKey(t=>t.MemberId)
+                .WillCascadeOnDelete(false);
 
-            this.HasRequired(m => m.Alert)
-                .WithMany()
-                .HasForeignKey(m => m.AlertId);
+            this.HasRequired(m => m.Alert).WithMany()
+                .HasForeignKey(t=>t.AlertId)
+                .WillCascadeOnDelete(false);
+            this.ToTable("Comments");
         }
 
         

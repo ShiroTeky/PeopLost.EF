@@ -44,7 +44,9 @@
     <Compile Include="Domain\Alertes\Alert.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Domain\Comments\Comment.cs" />
-    <Compile Include="Domain\Maps\globalGeo.cs" />
+    <Compile Include="Domain\ConnectionHub\Connection.cs" />
+    <Compile Include="Domain\Towns\Town.cs" />
+    <Compile Include="Domain\Countries\Country.cs" />
     <Compile Include="Domain\Members\Member.cs" />
     <Compile Include="Domain\Persons\Person.cs" />
     <Compile Include="Domain\Maps\PersonPointGeo.cs" />

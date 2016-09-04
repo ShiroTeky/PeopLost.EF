@@ -1,5 +1,5 @@
 ﻿
-
+using PeopLost.Core.Domain.ConnectionHub;
 using PeopLost.Core.Domain.Members;
 namespace PeopLost.Data.Mapping.Members
 {
@@ -8,21 +8,21 @@ namespace PeopLost.Data.Mapping.Members
         public MemberMap()
         {
             this.HasKey(t => t.Id);
-            this.Property(t => t.FirstName).HasMaxLength(30);
-            this.Property(t => t.LastName).HasMaxLength(30);
+            this.Property(t => t.Address);
+            this.Property(t => t.BirthDay);
+            this.Property(t => t.ImageUrl);
+            this.Property(t => t.Email);
+            this.Property(t => t.UserName);
             this.Property(t => t.Gender).HasMaxLength(1);
-            this.Property(t => t.Email).HasMaxLength(30);
-            this.Property(t => t.Phone).HasMaxLength(30);
             this.Property(t => t.isAdmin);
+            this.Property(t => t.Commune);
+            //this.Property(t => t.ConnectionId);
+           // this.HasRequired(m => m.C)
+    //.WithMany()
+    //.HasForeignKey(m => m.);
 
-            this.HasRequired(t => t.PictureAdmin)
-                .WithMany()
-                .HasForeignKey(t => t.Id);
 
+            this.ToTable("Members");
         }
-
-
-        
-
     }
 }

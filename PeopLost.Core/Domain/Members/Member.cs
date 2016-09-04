@@ -1,32 +1,32 @@
-﻿using System.ComponentModel;
+﻿
 using System;
-using System.Collections.Generic;
+using PeopLost.Core.Domain.ConnectionHub;
 using PeopLost.Core.Domain.Pictures;
+using PeopLost.Core.Domain.Comments;
+using System.Collections.Generic;
 
 namespace PeopLost.Core.Domain.Members
 {
     public partial class Member:BaseEntity
     {
+        //private ICollection<Comment> _comments;
+        
         public Member()
         {
-            this.MemberGuid = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
 
 
         /// <summary>
-        /// Gets or sets the Member Guid
+        /// Gets or sets the username
         /// </summary>
-        public Guid MemberGuid { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
-        /// Gets or sets the firstname
+        /// Gets or sets the email
         /// </summary>
-        public string FirstName { get; set; }
+        public string Email { get; set; }
 
-        /// <summary>
-        /// Gets or sets the lastname
-        /// </summary>
-        public string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets the gender
@@ -34,28 +34,32 @@ namespace PeopLost.Core.Domain.Members
         public string Gender { get; set; }
 
         /// <summary>
-        /// Gets or sets the Member Email
+        /// Gets or sets the Member Image
         /// </summary>
-        public string Email { get; set; }
+        public string ImageUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets the Member Contact
+        /// Gets or sets the Member BirthDay
         /// </summary>
-        public string Phone { get; set; }
+        public string BirthDay { get; set; }
 
+        public string Address { get; set; }
         /// <summary>
         /// Gets or sets the Status of Member:Admin or Not
         /// </summary>
         public bool isAdmin { get; set; }
-        
-        /// <summary>
-        /// Gets or sets the Member picture
-        /// </summary>
-        public virtual Picture PictureAdmin
-        {
-            get;
-            set;
-        }
 
+        public string Commune { get; set; }
+
+        public List<Connections> ConnectionId { get; set; }
+    }
+
+
+    public class AspUser
+    {
+        public Guid Id{get;set;}
+        public string ImageUrl{get;set;}
+        public string UserName{get;set;}
+        public string Email { get; set; }
     }
 }

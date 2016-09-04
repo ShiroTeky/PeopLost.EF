@@ -4,9 +4,9 @@ namespace PeopLost.Web.Models
 {
     public class globalGeoModels
     {
-        public Int32 PersonId { get; set; }
+        public Guid PersonId { get; set; }
 
-        public ICollection<PersonPointGeoModels> PersonPointGeos{get;set;}
+        public IList<PersonPointGeoModels> PersonPointGeos{get;set;}
     }
 
 

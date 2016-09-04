@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using PeopLost.Core;
@@ -57,11 +58,9 @@ namespace PeopLost.Data
         /// </summary>
         /// <param name="id">Identifier</param>
         /// <returns>Entity</returns>
-        public virtual T GetById(object id)
+        public T GetById(object id)
         {
-            //see some suggested performance optimization (not tested)
-            //http://stackoverflow.com/questions/11686225/dbset-find-method-ridiculously-slow-compared-to-singleordefault-on-id/11688189#comment34876113_11688189
-            return this.Entities.Find(id);
+           return this.Entities.Find(id);
         }
 
         /// <summary>
@@ -118,6 +117,8 @@ namespace PeopLost.Data
                 if (entity == null)
                     throw new ArgumentNullException("entity");
 
+                this.Entities.Attach(entity);
+                this._context.ChangeState<T>(entity, EntityState.Modified);
                 this._context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)

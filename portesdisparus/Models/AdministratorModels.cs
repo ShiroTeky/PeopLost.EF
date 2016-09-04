@@ -8,7 +8,7 @@ namespace PeopLost.Web.Models
         /// <summary>
         /// Gets or sets the customer Guid
         /// </summary>
-        public Int32 AdminId { get; set; }
+        public Guid AdminId { get; set; }
 
         [Display(Name="First Name")]
         [Required]

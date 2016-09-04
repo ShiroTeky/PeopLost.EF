@@ -4,38 +4,46 @@ using System.Collections.Generic;
 using PeopLost.Core.Data;
 using PeopLost.Core.Domain.Members;
 using PeopLost.Core.Domain.Pictures;
-
+using PeopLost.Dapper.Members;
 
 namespace PeopLost.Service.Members
 {
-    public virtual class MemberService: IMemberService
+    public class MemberService: IMemberService
     {
         IRepository<Member> memberRepository;
-        IRepository<Picture> pictureRepository;
+        MemberRepository memberdapper = new MemberRepository();
+        //IRepository<Picture> pictureRepository;
 
-        public MemberService(IRepository<Member> memberRepository, IRepository<Picture> pictureRepository)
+        public MemberService(IRepository<Member> memberRepository)
+            // IRepository<Picture> pictureRepository)
         {
             this.memberRepository = memberRepository;
-            this.pictureRepository = pictureRepository;
+           // this.pictureRepository = pictureRepository;
         }
 
-        public virtual void DeleteMember(Member member)
+        public virtual void Delete(Member member)
         {
             memberRepository.Delete(member);
-            pictureRepository.Delete(member.PictureAdmin);
+            //pictureRepository.Delete(member.Picture);
         }
 
-        public virtual Member GetMemberById(int memberId)
+        public Member GetByEmail(string email)
         {
-            return memberRepository.GetById(memberId);
+           return memberdapper.GetByEmail(email);
         }
 
-        public virtual void InsertMember(Member member)
+        public virtual Member GetById(Guid memberId)
+        {
+            return memberdapper.FindById(memberId);
+        }
+
+        public void Insert(Member member)
         {
             memberRepository.Insert(member);
+       
         }
 
-        public virtual void UpdateMember(Member member)
+        public virtual void Update(Member member)
         {
             memberRepository.Update(member);
         }

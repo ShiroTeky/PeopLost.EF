@@ -1,5 +1,7 @@
-﻿
+﻿using System.Collections;
 using PeopLost.Core.Domain.Maps;
+using System.Collections.Generic;
+using System;
 namespace PeopLost.Service.Maps
 {
     public partial interface IPersonPointGeoService
@@ -8,25 +10,48 @@ namespace PeopLost.Service.Maps
         /// Deletes a  PersonPointGeo
         /// </summary>
         /// <param name="PersonPointGeo">PersonPointGeo</param>
-        public virtual void DeletePersonPointGeo(PersonPointGeo PersonPointGeo);
+        void Delete(PersonPointGeo PersonPointGeo);
 
         /// <summary>
         /// Gets a PersonPointGeo
         /// </summary>
         /// <param name="PersonPointGeoId">The PersonPointGeo identifier</param>
         /// <returns>PersonPointGeo</returns>
-        public virtual PersonPointGeo GetPersonPointGeoById(int PersonPointGeoId);
+        PersonPointGeo GetById(Guid PersonPointGeoId);
 
         /// <summary>
         /// Inserts a PersonPointGeo item
         /// </summary>
         /// <param name="PersonPointGeo">PersonPointGeo</param>
-        public virtual void InsertPersonPointGeo(PersonPointGeo PersonPointGeo);
+        void Insert(PersonPointGeo PersonPointGeo);
 
         /// <summary>
         /// Updates the PersonPointGeo item
         /// </summary>
         /// <param name="PersonPointGeo">PersonPointGeo item</param>
-        public virtual void UpdatePersonPointGeo(PersonPointGeo PersonPointGeo);
+        void Update(PersonPointGeo PersonPointGeo);
+
+
+        #region Person Position interface methods
+
+        /// <summary>
+        /// Gets People by Country
+        /// </summary>
+        /// <param name="country"></param>
+        IList<PersonPointGeo> GetAll(string town);
+
+        /// <summary>
+        /// Gets all people
+        /// </summary>
+        IList<PersonPointGeo>  GetAll();
+
+        /// <summary>
+        /// Gets all GeoLocation by Person
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<PersonPointGeo> GetAllbyPersonId(Guid id);
+
+        #endregion
     }
 }

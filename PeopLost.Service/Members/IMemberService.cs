@@ -1,6 +1,8 @@
 ﻿
 using PeopLost.Core.Domain.Pictures;
 using PeopLost.Core.Domain.Members;
+using System;
+using System.Threading.Tasks;
 
 namespace PeopLost.Service.Members
 {
@@ -10,26 +12,27 @@ namespace PeopLost.Service.Members
         /// Deletes a  member
         /// </summary>
         /// <param name="Member">Member</param>
-        public virtual void DeleteMember(Member Member);
+        void Delete(Member Member);
 
         /// <summary>
         /// Gets a member
         /// </summary>
         /// <param name="MemberId">The Member identifier</param>
         /// <returns>Member</returns>
-        public virtual Member GetMemberById(int MemberId);
+        Member GetById(Guid MemberId);
 
         /// <summary>
         /// Inserts a Member item
         /// </summary>
         /// <param name="news">Member</param>
-        public virtual void InsertMember(Member Member);
+        void Insert(Member Member);
 
+        Member GetByEmail(string email);
         /// <summary>
         /// Updates the Member item
         /// </summary>
         /// <param name="Member">Member item</param>
-        public virtual void UpdateMember(Member Member);
+        void Update(Member Member);
       
     }
 }

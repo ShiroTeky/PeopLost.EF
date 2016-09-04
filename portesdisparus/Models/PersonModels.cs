@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace PeopLost.Web.Models
@@ -8,9 +9,10 @@ namespace PeopLost.Web.Models
     {
 
         /// <summary>
-        /// Gets or sets the Person Guid
+        /// Gets or sets the Person Int
         /// </summary>
-        public Int32 PersonId { get; set; }
+        public Guid PersonId { get; set; }
+
 
         [Display(Name = "First Name")]
         [Required]
@@ -24,13 +26,9 @@ namespace PeopLost.Web.Models
         [Required]
         public string Gender { get; set; }
 
-        [Display(Name = "Day of the Disappearing")]
+        [Display(Name = "Adress or street")]
         [Required]
-        public DateTime DayDisappear { get; set; }
-
-        [Display(Name = "Adress or street where he disappeared")]
-        [Required]
-        public string LooserAddress { get; set; }
+        public string Address { get; set; }
 
         [Display(Name = "Country")]
         [Required]
@@ -49,128 +47,234 @@ namespace PeopLost.Web.Models
         public string Caracteristics { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public MemberModels Member { get; set; }
+
     }
 
     public class ListPersonViewModel
     {
-        private ICollection<PersonModels> _listpersonViewModel;
+        public IList<PersonModels> _Items { get; set; }
 
         public ListPersonViewModel()
         {
-            this._listpersonViewModel.Add(new PersonModels()
-            {
-                PersonId = 0,
-                FirstName = "Koffi",
-                LastName = "Hermann",
-                Gender = "M",
-                Country="Cote d'ivoire",
-                City = "Abidjan",
-                YearsOld = 12,
-                LooserAddress="Abobo",
-                DayDisappear=DateTime.Now,
-                Caracteristics="Peau claire, yeux bleu, chemise marron, un jean bleu",
-                ImageUrl = "/Images/alexisdiaw.jpg"
-            });
-            this._listpersonViewModel.Add(new PersonModels()
-            {
-                PersonId = 1,
-                FirstName = "Koffi",
-                LastName = "Hermann",
-                Gender = "M",
-                Country = "Cote d'ivoire",
-                City = "Abidjan",
-                YearsOld = 12,
-                LooserAddress = "Cocody",
-                DayDisappear = DateTime.Now,
-                Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
-                ImageUrl = "/Images/alexisdiaw.jpg"
-            });
-            this._listpersonViewModel.Add(new PersonModels()
-            {
-                PersonId = 2,
-                FirstName = "Koffi",
-                LastName = "Hermann",
-                Gender = "M",
-                Country = "Cote d'ivoire",
-                City = "Abidjan",
-                YearsOld = 12,
-                LooserAddress = "Plateau",
-                DayDisappear = DateTime.Now,
-                Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
-                ImageUrl = "/Images/alexisdiaw.jpg"
-            });
-            this._listpersonViewModel.Add(new PersonModels()
-            {
-                PersonId = 3,
-                FirstName = "Koffi",
-                LastName = "Hermann",
-                Gender = "M",
-                Country = "Cote d'ivoire",
-                City = "Abidjan",
-                YearsOld = 12,
-                LooserAddress = "Adjame",
-                DayDisappear = DateTime.Now,
-                Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
-                ImageUrl = "/Images/alexisdiaw.jpg"
-            });
-            this._listpersonViewModel.Add(new PersonModels()
-            {
-                PersonId = 4,
-                FirstName = "Koffi",
-                LastName = "Hermann",
-                Gender = "M",
-                Country = "Cote d'ivoire",
-                City = "Abidjan",
-                YearsOld = 12,
-                LooserAddress = "Abobo",
-                DayDisappear = DateTime.Now,
-                Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
-                ImageUrl = "/Images/alexisdiaw.jpg"
-            });
-            this._listpersonViewModel.Add(new PersonModels()
-            {
-                PersonId = 5,
-                FirstName = "Koffi",
-                LastName = "Hermann",
-                Gender = "M",
-                Country = "Cote d'ivoire",
-                City = "Abidjan",
-                YearsOld = 12,
-                LooserAddress = "Adjame",
-                DayDisappear = DateTime.Now,
-                Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
-                ImageUrl = "/Images/alexisdiaw.jpg"
-            });
+            this._Items = new List<PersonModels>();
+            //ListpersonViewModel = new List<PersonModels>() {
+            //    new PersonModels()
+            //    {
+            //        PersonId = 0,
+            //        FirstName = "Koffi",
+            //        LastName = "Hermann",
+            //        Gender = "M",
+            //        Country="Cote d'ivoire",
+            //        City = "Abidjan",
+            //        YearsOld = 12,
+            //        LooserAddress="Abobo",
+            //        DayDisappear=DateTime.Now,
+            //        Caracteristics="Peau claire, yeux bleu, chemise marron, un jean bleu",
+            //        ImageUrl = "/Images/alexisdiaw.jpg",
+            //        Member = new MemberModels(){
+            //            MemberId = 1,
+            //            FirstName = "Anne",
+            //            LastName = "Ndri",
+            //            Gender = "F",
+            //            isAdmin = false,
+            //            Email = "xyz@peoplost.com",
+            //            Phone = "XX-XX-XX-XX",
+            //            ImageUrl = "/Images/annendri.gif"
+            //        },
+            //        Found = true
+                    
+            //    },
+            //    new PersonModels()
+            //    {
+            //        PersonId = 1,
+            //        FirstName = "Koffi",
+            //        LastName = "Hermann",
+            //        Gender = "M",
+            //        Country = "Cote d'ivoire",
+            //        City = "Abidjan",
+            //        YearsOld = 12,
+            //        LooserAddress = "Cocody",
+            //        DayDisappear = DateTime.Now,
+            //        Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
+            //        ImageUrl = "/Images/alexisdiaw.jpg",
+            //        Member = new MemberModels(){
+            //            MemberId = 1,
+            //            FirstName = "Anne",
+            //            LastName = "Ndri",
+            //            Gender = "F",
+            //            isAdmin = false,
+            //            Email = "xyz@peoplost.com",
+            //            Phone = "XX-XX-XX-XX",
+            //            ImageUrl = "/Images/annendri.gif"
+            //        }
+            //        ,
+            //        Found = false
+            //    },
+            //    new PersonModels()
+            //    {
+            //        PersonId = 2,
+            //        FirstName = "Koffi",
+            //        LastName = "Hermann",
+            //        Gender = "M",
+            //        Country = "Cote d'ivoire",
+            //        City = "Abidjan",
+            //        YearsOld = 12,
+            //        LooserAddress = "Plateau",
+            //        DayDisappear = DateTime.Now,
+            //        Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
+            //        ImageUrl = "/Images/alexisdiaw.jpg",
+            //        Member = new MemberModels(){
+            //            MemberId = 1,
+            //            FirstName = "Anne",
+            //            LastName = "Ndri",
+            //            Gender = "F",
+            //            isAdmin = false,
+            //            Email = "xyz@peoplost.com",
+            //            Phone = "XX-XX-XX-XX",
+            //            ImageUrl = "/Images/annendri.gif"
+            //        }
+            //        ,
+            //        Found = false
+            //    },
+            //    new PersonModels()
+            //    {
+            //        PersonId = 3,
+            //        FirstName = "Koffi",
+            //        LastName = "Hermann",
+            //        Gender = "M",
+            //        Country = "Cote d'ivoire",
+            //        City = "Abidjan",
+            //        YearsOld = 12,
+            //        LooserAddress = "Adjame",
+            //        DayDisappear = DateTime.Now,
+            //        Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
+            //        ImageUrl = "/Images/alexisdiaw.jpg",
+            //        Member = new MemberModels(){
+            //            MemberId = 1,
+            //            FirstName = "Anne",
+            //            LastName = "Ndri",
+            //            Gender = "F",
+            //            isAdmin = false,
+            //            Email = "xyz@peoplost.com",
+            //            Phone = "XX-XX-XX-XX",
+            //            ImageUrl = "/Images/annendri.gif"
+            //        }
+            //        ,
+            //        Found = true
+            //    },
+            //    new PersonModels()
+            //    {
+            //        PersonId = 4,
+            //        FirstName = "Koffi",
+            //        LastName = "Hermann",
+            //        Gender = "M",
+            //        Country = "Cote d'ivoire",
+            //        City = "Abidjan",
+            //        YearsOld = 12,
+            //        LooserAddress = "Abobo",
+            //        DayDisappear = DateTime.Now,
+            //        Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
+            //        ImageUrl = "/Images/alexisdiaw.jpg",
+            //        Member = new MemberModels(){
+            //            MemberId = 1,
+            //            FirstName = "Anne",
+            //            LastName = "Ndri",
+            //            Gender = "F",
+            //            isAdmin = false,
+            //            Email = "xyz@peoplost.com",
+            //            Phone = "XX-XX-XX-XX",
+            //            ImageUrl = "/Images/annendri.gif"
+            //        }
+            //        ,
+            //        Found = false
+            //    },
+            //    new PersonModels()
+            //    {
+            //        PersonId = 5,
+            //        FirstName = "Koffi",
+            //        LastName = "Hermann",
+            //        Gender = "M",
+            //        Country = "Cote d'ivoire",
+            //        City = "Abidjan",
+            //        YearsOld = 12,
+            //        LooserAddress = "Adjame",
+            //        DayDisappear = DateTime.Now,
+            //        Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
+            //        ImageUrl = "/Images/alexisdiaw.jpg",
+            //        Member = new MemberModels(){
+            //            MemberId = 1,
+            //            FirstName = "Anne",
+            //            LastName = "Ndri",
+            //            Gender = "F",
+            //            isAdmin = false,
+            //            Email = "xyz@peoplost.com",
+            //            Phone = "XX-XX-XX-XX",
+            //            ImageUrl = "/Images/annendri.gif"
+            //        }
+            //        ,
+            //        Found = false
+            //    },
 
-            this._listpersonViewModel.Add(new PersonModels()
-            {
-                PersonId = 6,
-                FirstName = "Koffi",
-                LastName = "Hermann",
-                Gender = "M",
-                Country = "Cote d'ivoire",
-                City = "Abidjan",
-                YearsOld = 12,
-                LooserAddress = "Adjame",
-                DayDisappear = DateTime.Now,
-                Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
-                ImageUrl = "/Images/alexisdiaw.jpg"
-            });
+            //    new PersonModels()
+            //    {
+            //        PersonId = 6,
+            //        FirstName = "Koffi",
+            //        LastName = "Hermann",
+            //        Gender = "M",
+            //        Country = "Cote d'ivoire",
+            //        City = "Abidjan",
+            //        YearsOld = 12,
+            //        LooserAddress = "Adjame",
+            //        DayDisappear = DateTime.Now,
+            //        Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
+            //        ImageUrl = "/Images/alexisdiaw.jpg",
+            //        Member = new MemberModels(){
+            //            MemberId = 1,
+            //            FirstName = "Anne",
+            //            LastName = "Ndri",
+            //            Gender = "F",
+            //            isAdmin = false,
+            //            Email = "xyz@peoplost.com",
+            //            Phone = "XX-XX-XX-XX",
+            //            ImageUrl = "/Images/annendri.gif"
+            //        }
+            //        ,
+            //        Found = false
+            //    },
 
-            this._listpersonViewModel.Add(new PersonModels()
-            {
-                PersonId = 7,
-                FirstName = "Koffi",
-                LastName = "Hermann",
-                Gender = "M",
-                Country = "Cote d'ivoire",
-                City = "Abidjan",
-                YearsOld = 12,
-                LooserAddress = "Adjame",
-                DayDisappear = DateTime.Now,
-                Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
-                ImageUrl ="/Images/alexisdiaw.jpg"
-            });
+            //    new PersonModels()
+            //    {
+            //        PersonId = 7,
+            //        FirstName = "Koffi",
+            //        LastName = "Hermann",
+            //        Gender = "M",
+            //        Country = "Cote d'ivoire",
+            //        City = "Abidjan",
+            //        YearsOld = 12,
+            //        LooserAddress = "Adjame",
+            //        DayDisappear = DateTime.Now,
+            //        Caracteristics = "Peau claire, yeux bleu, chemise marron, un jean bleu",
+            //        ImageUrl ="/Images/alexisdiaw.jpg",
+            //        Member = new MemberModels(){
+            //            MemberId = 1,
+            //            FirstName = "Anne",
+            //            LastName = "Ndri",
+            //            Gender = "F",
+            //            isAdmin = false,
+            //            Email = "xyz@peoplost.com",
+            //            Phone = "XX-XX-XX-XX",
+            //            ImageUrl = "/Images/annendri.gif"
+            //        }
+            //        ,
+            //        Found = true
+            //    }
+
+
+
+            //};
+            
         }
     }
 }

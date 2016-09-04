@@ -10,26 +10,35 @@ namespace PeopLost.Service.Administrators
         /// Deletes a  Administrator
         /// </summary>
         /// <param name="Administrator">Administrator</param>
-        public virtual void DeleteAdministrator(Administrator Administrator);
+        void Delete(Administrator Administrator);
 
         /// <summary>
         /// Gets a Administrator
         /// </summary>
         /// <param name="AdministratorId">The Administrator identifier</param>
         /// <returns>Administrator</returns>
-        public virtual Administrator GetAdministratorById(int AdministratorId);
+        Administrator GetById(int AdministratorId);
 
         /// <summary>
         /// Inserts a Administrator item
         /// </summary>
         /// <param name="Administrator">Administrator</param>
-        public virtual void InsertAdministrator(Administrator Administrator);
+        void Insert(Administrator Administrator);
 
         /// <summary>
         /// Updates the Administrator item
         /// </summary>
         /// <param name="Administrator">Administrator item</param>
-        public virtual void UpdateAdministrator(Administrator Administrator);
+        void Update(Administrator Administrator);
+
+        //Here the service for send the notification
+        /// <summary>
+        /// Validate Alert. Generate a Push Notification
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        bool ValidateAlert(Guid id,Boolean status);
         
     }
 }

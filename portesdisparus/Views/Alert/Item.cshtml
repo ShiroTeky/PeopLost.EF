@@ -1,0 +1,32 @@
+﻿@model PeopLost.Web.Models.AlertModels
+
+@{
+    ViewBag.Title = "Item";
+}
+@*<p>
+        <button class="btn btn-default"> @Html.ActionLink("Create New", "Create")</button>
+    </p>*@
+
+<div class="container">
+    <div>
+            <!-- Box Comment -->
+            <div class="box box-widget">
+
+                @Html.Action("_Person", "Alert", new { AlertId = Model.AlertId })
+                <div id="lastps">
+                    <button type="button" class="btn btn-default btn-xs" onclick="displaymodal()">
+                        <i class="glyphicon glyphicon-map-marker"></i> Derniere localisation
+                    </button>
+                </div>
+                <div>
+                    @Html.Action("_CreateComment", "Comment", new { AlertId = Model.AlertId })
+                </div>
+
+            </div>
+            <!-- /.box -->
+    </div>
+    <div>
+        @Html.Action("_Map", "Alert", new { PersonId = Model.PersonId })
+    </div>
+    
+</div>

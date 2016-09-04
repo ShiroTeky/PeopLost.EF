@@ -1,10 +1,7 @@
 ﻿using PeopLost.Core.Domain.Alertes;
 using PeopLost.Core.Domain.Members;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PeopLost.Core.Domain.Comments
 {
@@ -12,8 +9,8 @@ namespace PeopLost.Core.Domain.Comments
     {
         public Comment()
         {
+            this.Id = Guid.NewGuid();
         }
-
         /// <summary>
         /// Gets or sets the post
         /// </summary>
@@ -27,16 +24,16 @@ namespace PeopLost.Core.Domain.Comments
         /// <summary>
         /// Gets or sets the Alert Id
         /// </summary>
-        public int AlertId { get; set; }
+        public Guid AlertId { get; set; }
 
         /// <summary>
         /// Gets or sets the Member Id
         /// </summary>
-        public int MemberId { get; set; }
+        public Guid MemberId { get; set; }
         // Add the Alert Here ; public virtual Alerte
         public virtual Alert Alert { get; set; } 
 
-        // Add the Member Here; public virtual Member
+        //// Add the Member Here; public virtual Member
         public virtual Member Member { get; set; }
     }
 }

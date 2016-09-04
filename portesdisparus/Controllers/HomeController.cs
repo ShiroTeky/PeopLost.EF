@@ -1,4 +1,5 @@
-﻿using System;
+﻿using portesdisparus.Notifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,7 @@ namespace PeopLost.Controllers
             return View();
         }
 
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
